@@ -1,0 +1,6 @@
+query poke {
+  test {
+    name
+    no
+  }
+}
