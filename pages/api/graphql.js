@@ -5,17 +5,7 @@ import axios from 'axios';
 
 const cors = Cors()
 
-//データ
-//pokeAPIから取ってくるもの: id, name(en), t
-// const pokes = [{
-//   name: "フシギダネ",
-//   no: 1,
-// },
-// {
-//   name: "フシギソウ",
-//   no: 2,
-// }
-// ]
+//データ取得
 const pokeMass = []
 const getData = async() => {
         for (let i = 1; i <= 151; i++) {
@@ -26,12 +16,12 @@ const getData = async() => {
             const pokeId = data.id
             const pokeName = data.name
             const pokeImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png`
-            console.log(pokeImage);
+                // console.log(pokeImage);
             const pokeType1 = data.types[0].type.name
             const pokeType2 = data.types.length > 1 ? data.types[1].type.name : null
                 // console.log(pokeType1);
-            console.log(pokeType2);
-            // console.log(pokeId);
+                // console.log(pokeType2);
+                // console.log(pokeId);
             pokeObj.id = pokeId
             pokeObj.name = pokeName
             pokeObj.image = pokeImage
