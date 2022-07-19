@@ -35,19 +35,17 @@ function GetPokes() {
     return (
     <>
       <Link as={`/pokemon/${poke.name}`} href={{ pathname: `/pokemon/${poke.name}`, query: pokeInfo}}>
-          <Flex boxShadow='lg' _hover={{ boxShadow: 'base' }} transitionDuration='0.3s' alignItems='center'
-            gap='1'
-            px='3'
-          color='black'>
-      <Box key={poke.id} fontSize='sm'>{poke.id}</Box>
-      <Box key={poke.image} rounded='base'>
-       <Img minW='35' maxW='45' src={poke.image} alt="ポケモンの画像" /> 
-      </Box>
-      <Box key={poke.name} fontSize="xl" fontWeight='bold'>{poke.name}</Box>
-      {/* <div key={type1}>{type1}</div>
-          <div key={type2}>{type2}</div> */}
+        <Flex boxShadow='lg' _hover={{ boxShadow: 'base' }} transitionDuration='0.3s' alignItems='center'
+        gap='1'
+        px='3'
+        color='black'>
+          <Box key={poke.id} fontSize='sm'>{poke.id}</Box>
+          <Box key={poke.image} rounded='base'>
+          <Img minW='35' maxW='45' src={poke.image} alt="ポケモンの画像" /> 
+          </Box>
+          <Box key={poke.name} fontSize="xl" fontWeight='bold'>{poke.name}</Box>
         </Flex>
-        </Link>
+      </Link>
     </>
 )} 
   )
@@ -72,7 +70,7 @@ export default function Home() {
           color='gray.400'
           textTransform='capitalize'
           >
-              <GetPokes></GetPokes>
+          <GetPokes></GetPokes>
         </SimpleGrid>
       </Container>
     </Box>
