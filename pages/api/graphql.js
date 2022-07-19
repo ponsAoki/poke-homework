@@ -13,7 +13,7 @@ const getData = async() => {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
                 .catch(err => console.log("接続エラー", err))
             const data = response.data
-            const pokeId = data.id
+            const pokeId = ('000' + data.id).slice(-3)
             const pokeName = data.name
             const pokeImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png`
                 // console.log(pokeImage);
@@ -36,7 +36,7 @@ const getData = async() => {
 
 const typeDefs = gql `
   type Poke {
-    id: Int,
+    id: String,
     name: String,
     image: String,
     type1: String,
