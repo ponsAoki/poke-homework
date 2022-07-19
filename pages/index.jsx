@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client'
-import {SimpleGrid, Box, Img, Flex } from "@chakra-ui/react"
+import {SimpleGrid, Box, Img, Flex, Container } from "@chakra-ui/react"
 import Link from 'next/link'
 // import Link from 'next/link'
 
@@ -35,12 +35,15 @@ function GetPokes() {
     return (
     <>
       <Link as={`/pokemon/${poke.name}`} href={{ pathname: `/pokemon/${poke.name}`, query: pokeInfo}}>
-      <Flex boxShadow='lg'>
-      <div key={poke.id}>{poke.id}</div>
-      <div key={poke.image}>
-       <Img boxSize='38px' src={poke.image} alt="ポケモンの画像" /> 
-      </div>
-      <div key={poke.name}>{poke.name}</div>
+          <Flex boxShadow='lg' _hover={{ boxShadow: 'base' }} transitionDuration='0.3s' alignItems='center'
+            gap='1'
+            px='3'
+          color='black'>
+      <Box key={poke.id} fontSize='sm'>{poke.id}</Box>
+      <Box key={poke.image} rounded='base'>
+       <Img minW='35' maxW='45' src={poke.image} alt="ポケモンの画像" /> 
+      </Box>
+      <Box key={poke.name} fontSize="xl" fontWeight='bold'>{poke.name}</Box>
       {/* <div key={type1}>{type1}</div>
           <div key={type2}>{type2}</div> */}
         </Flex>
@@ -54,24 +57,24 @@ export default function Home() {
   
   
   return (
-    <div className={styles.container}>
-
-      <main className={styles.main}>
+    <Box>
+      <Container maxW='960' pt='10' pb='20'>
         <SimpleGrid
-            bg='gray.50'
-            columns={{ sm: 2, md: 4 }}
-            spacing='8'
+            // bg='gray.50'
+          columns={{ sm: 2, md: 3 }}
+          // maxW='700'
+          // mt='10'
+          // mb='20'
+            spacing='4'
             // p='10'
             textAlign='center'
-            rounded='lg'
+            // rounded='lg'
           color='gray.400'
           textTransform='capitalize'
           >
               <GetPokes></GetPokes>
         </SimpleGrid>
-          
-      </main>
-
-    </div>
+      </Container>
+    </Box>
   )
 }
