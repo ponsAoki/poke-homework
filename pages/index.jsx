@@ -1,15 +1,14 @@
-import styles from '../styles/Home.module.css'
-import { useState } from 'react'
-import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client'
+// import { useState } from 'react'
+import { gql, useQuery } from '@apollo/client'
+// import client from './apollo-client'
 import {SimpleGrid, Box, Img, Flex, Container } from "@chakra-ui/react"
 import Link from 'next/link'
-// import Link from 'next/link'
 
 
 
 
 
-const POKEMONS = gql`
+  const POKEMONS = gql`
     query {
       test {
         id
@@ -20,14 +19,51 @@ const POKEMONS = gql`
       }
     }
   `
+//SSGで上手く実装する方法が分かりませんでした。
+// export const getStaticProps = async() => {
 
-function GetPokes() {
-  const { data,  loading, error } = useQuery(POKEMONS)
+//   const {data} = await client.query ({
+//     query: gql`
+//     query Poke {
+//       test {
+//         id
+//         name
+//         image
+//         type1
+//         type2
+//       }
+//     }
+//   `
+//   })
+//   // if (loading) return <p>loading..</p>
+//   // if (error) return <p>error!</p>
+
+//   return {
+//     props: {
+//       pokeData: data
+//     },
+//   }
+// }
+
+// export const getStaticPaths = async () => {
+//   // const data = 
+
+// }
+
+// const GetData = async() => {
+//   const { data, loading, error } = useQuery(POKEMONS)
+//   if (loading) return <p>読み込み中・・・</p>
+//   if (error) return <p>エラー</p>
+//   return await data
+// }
+
+const GetPokes = () => {
+  const {data, loading, error} = useQuery(POKEMONS)
   
-  if (loading) return <p>ロード中・・・</p>
+  if (loading) return <p>読み込み中・・・</p>
   if (error) return <p>エラー</p>
 
-  console.log(data);
+  // console.log(data);
 
   return data.test.map((poke) => {
     //ポケモン単体情報
@@ -35,7 +71,7 @@ function GetPokes() {
     return (
     <>
       <Link as={`/pokemon/${poke.name}`} href={{ pathname: `/pokemon/${poke.name}`, query: pokeInfo}}>
-        <Flex boxShadow='lg' _hover={{ boxShadow: 'base' }} transitionDuration='0.3s' alignItems='center'
+        <Flex boxShadow='lg' cursor='pointer' _hover={{ boxShadow: 'base' }} transitionDuration='0.3s' alignItems='center'
         gap='1'
         px='3'
         color='black'>
@@ -51,23 +87,15 @@ function GetPokes() {
   )
 }
 
-export default function Home() {
-  
+const Home = () => {
   
   return (
     <Box>
       <Container maxW='960' pt='10' pb='20'>
         <SimpleGrid
-            // bg='gray.50'
-          columns={{ sm: 2, md: 3 }}
-          // maxW='700'
-          // mt='10'
-          // mb='20'
+          columns={{ base: 1, sm: 2, md: 3 }}
             spacing='4'
-            // p='10'
             textAlign='center'
-            // rounded='lg'
-          color='gray.400'
           textTransform='capitalize'
           >
           <GetPokes></GetPokes>
@@ -76,3 +104,5 @@ export default function Home() {
     </Box>
   )
 }
+
+export default Home

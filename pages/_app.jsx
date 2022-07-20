@@ -1,15 +1,15 @@
 import '../styles/globals.css'
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { ChakraComponent, ChakraProvider } from '@chakra-ui/react'
+import { ApolloProvider } from '@apollo/client'
+import client from './apollo-client'
+import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react'
 
-const client = new ApolloClient({
-  uri: 'http://localhost:3000/api/graphql',
-  cache: new InMemoryCache(),
-})
 
-function MyApp({ Component, pageProps }) {
+
+const MyApp = ({ Component, pageProps }) => {
+  // const apolloClient = useApollo(pageProps)
+
   return (
     <React.StrictMode>
       <ChakraProvider>
