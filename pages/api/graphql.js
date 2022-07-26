@@ -1,6 +1,7 @@
 const { ApolloServer, gql } = require("apollo-server-micro");
 import Cors from 'micro-cors'
 import axios from 'axios';
+import * as Apollo from '@apollo/client'
 
 
 const cors = Cors()
@@ -35,7 +36,7 @@ const getData = async() => {
 
 
 const typeDefs = gql `
-  type Poke {
+ type Poke {
     id: String,
     name: String,
     image: String,
@@ -54,10 +55,32 @@ const resolvers = {
     }
 }
 
+export const POKEMONS = gql `
+    query {
+      test {
+        id
+        name
+        image
+        type1
+        type2
+      }
+    }
+  `
+
+export const usePokemonQuery = () => {
+    return Apollo.useQuery(POKEMONS)
+}
+
 const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
+    csrfPrevention: true, // highly recommended
+    cache: 'bounded',
 })
+
+// apolloServer.listen().then(({ url }) => {
+//     console.log(`🚀 Server ready at ${url}`);
+// });
 
 const startServer = apolloServer.start()
 

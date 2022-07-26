@@ -1,24 +1,27 @@
 // import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql} from '@apollo/client'
 // import client from './apollo-client'
 import {SimpleGrid, Box, Img, Flex, Container } from "@chakra-ui/react"
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+// import { client } from './apollo-client'
+import * as Apollo from '@apollo/client'
+import { usePokemonQuery } from './api/graphql'
 
 
 
 
-
-  const POKEMONS = gql`
-    query {
-      test {
-        id
-        name
-        image
-        type1
-        type2
-      }
-    }
-  `
+  // const POKEMONS = gql`
+  //   query {
+  //     test {
+  //       id
+  //       name
+  //       image
+  //       type1
+  //       type2
+  //     }
+  //   }
+  // `
 //SSGで上手く実装する方法が分かりませんでした。
 // export const getStaticProps = async() => {
 
@@ -58,10 +61,40 @@ import Link from 'next/link'
 // }
 
 const GetPokes = () => {
-  const {data, loading, error} = useQuery(POKEMONS)
+
+  // const [pokemons, setPokemons] = useState([])
+
+  // useEffect(() => {
+  //   (() => {
+  const { data, loading } = usePokemonQuery()
+  console.log(data);
+      
+      if (loading) {
+        return <p>読み込み中</p>
+      }
+
+      // const { data } = await client.query({
+      //   query: gql`
+      //     query Poke {
+      //       test {
+      //         id
+      //         name
+      //         image
+      //         type1
+      //         type2
+      //       }
+      //     }
+      //   `
+      // }) 
+      // console.log(data.test);
+      // setPokemons(data.test);
+  //   })()
+  // })
+
+  // const {data, loading, error} = useQuery(POKEMONS)
   
-  if (loading) return <p>読み込み中・・・</p>
-  if (error) return <p>エラー</p>
+  // if (loading) return <p>読み込み中・・・</p>
+  // if (error) return <p>エラー</p>
 
   // console.log(data);
 
